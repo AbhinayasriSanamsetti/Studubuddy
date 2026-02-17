@@ -148,7 +148,7 @@ def updateRoom(request,pk):
     if request.user!=room.host:
         return HttpResponse('You are not allowed here!')
 
-    if request.methos=='POST':
+    if request.method=='POST':
         form=RoomForm(request.POST,instance=room)
         if form.is_valid():
             form.save()
@@ -157,7 +157,8 @@ def updateRoom(request,pk):
         
 
     context={'form':form,'topics': topics}
-    return render(request,'base/room_form.')
+    return render(request, 'base/room_form.html', context)
+
 @login_required(login_url='/login')
 
 def deleteRoom(request,pk):
